@@ -1,2 +1,2 @@
 # PuttUp
-R6 GameJamm 
+R6 GameJam 

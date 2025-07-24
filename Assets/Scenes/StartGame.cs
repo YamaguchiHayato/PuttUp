@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Title : MonoBehaviour
+public class StartGame : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,6 @@ public class Title : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("PlayerChoice");
+        SceneManager.LoadScene("Jam");
     }
 }

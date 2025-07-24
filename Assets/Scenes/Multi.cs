@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Title : MonoBehaviour
+public class Multi : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void StartButton()
+    public void MultiButton()
     {
-        SceneManager.LoadScene("PlayerChoice");
+        SceneManager.LoadScene("MapChoice");
     }
 }

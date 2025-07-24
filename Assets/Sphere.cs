@@ -84,7 +84,7 @@ public class Sphere : MonoBehaviour
             Vector3 currentDragPos = hit.point;
             Vector3 direction = (dragStartPos - currentDragPos).normalized;
             float dragDistance = Vector3.Distance(dragStartPos, currentDragPos);
-            float force = Mathf.Clamp(dragDistance * forceMultiplier, 0f, maxForce);
+            float force = Mathf.Clamp(dragDistance * forceMultiplier, 0.0f, maxForce);
             Vector3 endPoint = transform.position + direction * force;
 
             // 線の始点：ボールの位置、終点：方向×力

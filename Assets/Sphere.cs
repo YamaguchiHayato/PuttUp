@@ -4,8 +4,12 @@ using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-public class DragShoot : MonoBehaviour
+public class Sphere : MonoBehaviour
 {
+    // スコアを表示するオブジェクト
+    [SerializeField] GameObject scoreObject;
+    ScoreTMP scoreTMPScript;
+
     private Rigidbody rb; // ボールに付いているRigidbody
 
     private Vector3 dragStartPos; // マウスを押した位置（ワールド座標）
@@ -22,6 +26,8 @@ public class DragShoot : MonoBehaviour
     {
         // Rigidbody コンポーネントの取得
         rb = GetComponent<Rigidbody>();
+        // スコア表示用のスクリプトを取得
+        scoreTMPScript = scoreObject.GetComponent<ScoreTMP>();
     }
 
     void Update()
@@ -90,17 +96,21 @@ public class DragShoot : MonoBehaviour
             // 実際にボールを打つ
             ShootBall(direction, force);
         }
+        // スコアを加算
+        scoreTMPScript.AddScore(1);
     }
 
     // Rigidbody に力を加えてボールを飛ばす処理
     void ShootBall(Vector3 direction, float force)
     {
-        rb.AddForce(direction * force, ForceMode.Impulse); // 一瞬の力（インパルス）を加える
+        // 一瞬の力（インパルス）を加える
+        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
     // ボールが動いているかどうかを判定（一定の速さ以下なら静止とみなす）
     bool IsBallMoving()
     {
+        // Rigidbody の速度が閾値以下なら静止とみなす
         return rb.velocity.magnitude > stopThreshold;
     }
 

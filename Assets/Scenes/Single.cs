@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Title : MonoBehaviour
+
+public class Single : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,8 +18,8 @@ public class Title : MonoBehaviour
         
     }
 
-    public void StartButton()
+    public void SingleButton()
     {
-        SceneManager.LoadScene("PlayerChoice");
+       SceneManager.LoadScene("MapChoice");
     }
 }

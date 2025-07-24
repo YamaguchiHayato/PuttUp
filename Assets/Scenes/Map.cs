@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Title : MonoBehaviour
+public class Map : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,11 +14,11 @@ public class Title : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    public void StartButton()
+    }
+    
+    public void MapSelectButton()
     {
-        SceneManager.LoadScene("PlayerChoice");
+        SceneManager.LoadScene("Lobby");
     }
 }

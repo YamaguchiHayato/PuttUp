@@ -1,28 +1,52 @@
 
+
+    
 using UnityEngine;
-using UnityEngine.UI; // Textを使う場合
 
 public class ShowTextOnCollision : MonoBehaviour
 {
-    public Text messageText; // InspectorでUI Textを割り当てる
+    public float transparentAlpha = 0.3f; // 透過時の透明度
+    private Material material;
+    private Color originalColor;
 
     void Start()
     {
-        if (messageText != null)
+        // このオブジェクトのマテリアルを取得（インスタンス化される）
+        material = GetComponent<Renderer>().material;
+
+        // 元の色を保存（後で戻すため）
+        originalColor = material.color;
+
+        // マテリアルのShaderがTransparent対応になっているか確認
+        if (material.shader.name == "Standard")
         {
-            messageText.enabled = false; // 最初は非表示
+            // Rendering ModeをTransparentに設定
+            material.SetFloat("_Mode", 3); // 3 = Transparent
+            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetInt("_ZWrite", 1); // 深度バッファに書き込む（0だと消えることがある）
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.EnableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.renderQueue = 3000;
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Target")) // タグで判定
+        if (other.CompareTag("Ball"))
         {
-            if (messageText != null)
-            {
-                messageText.text = "当たった！";
-                messageText.enabled = true;
-            }
+            Color newColor = originalColor;
+            newColor.a = transparentAlpha; // 透過度を設定
+            material.color = newColor;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ball"))
+        {
+            material.color = originalColor; // 元の色に戻す
         }
     }
 }

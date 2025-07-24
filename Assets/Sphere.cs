@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class DragShoot : MonoBehaviour
@@ -14,6 +16,7 @@ public class DragShoot : MonoBehaviour
 
     private const float stopThreshold = 1.0f;
     private bool isDragging = false; // ドラッグ中かどうかのフラグ
+
 
     void Start()
     {
@@ -100,4 +103,5 @@ public class DragShoot : MonoBehaviour
     {
         return rb.velocity.magnitude > stopThreshold;
     }
+
 }

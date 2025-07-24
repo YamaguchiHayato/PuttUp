@@ -11,6 +11,7 @@ public class Sphere : MonoBehaviour
     ScoreTMP scoreTMPScript;
 
     private Rigidbody rb; // ボールに付いているRigidbody
+    public LineRenderer lineRenderer;// ドラッグ中に線を描画するためのLineRenderer 
 
     private Vector3 dragStartPos; // マウスを押した位置（ワールド座標）
     private Vector3 dragEndPos;   // マウスを離した位置（ワールド座標）
@@ -28,6 +29,11 @@ public class Sphere : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // スコア表示用のスクリプトを取得
         scoreTMPScript = scoreObject.GetComponent<ScoreTMP>();
+        if (lineRenderer != null)
+        {
+            lineRenderer.positionCount = 2;// 線の頂点数を2に設定
+            lineRenderer.enabled = false; // 初期状態では線を非表示にする
+        }
     }
 
     void Update()
@@ -72,7 +78,20 @@ public class Sphere : MonoBehaviour
     // ドラッグ中に呼ばれる処理
     void UpdateDrag()
     {
-        // 将来的に UI 表示や線・矢印の描画などに使用可能
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Vector3 currentDragPos = hit.point;
+            Vector3 direction = (dragStartPos - currentDragPos).normalized;
+            float dragDistance = Vector3.Distance(dragStartPos, currentDragPos);
+            float force = Mathf.Clamp(dragDistance * forceMultiplier, 0f, maxForce);
+            Vector3 endPoint = transform.position + direction * force;
+
+            // 線の始点：ボールの位置、終点：方向×力
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, endPoint);
+            lineRenderer.enabled = true;
+        }
     }
 
     // マウスを離してショットを実行する処理
@@ -95,6 +114,10 @@ public class Sphere : MonoBehaviour
 
             // 実際にボールを打つ
             ShootBall(direction, force);
+        }
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = false; // マウスを離したら線を非表示に
         }
         // スコアを加算
         scoreTMPScript.AddScore(1);

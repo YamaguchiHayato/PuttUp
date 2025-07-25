@@ -2,126 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraScpirt : MonoBehaviour
 {
-    public Transform target; // 追いかけるボール（プレイヤー）
-    public Vector3 offset = new Vector3(0, 5, -10); // カメラの位置のずれ
-    public float smoothSpeed = 0.125f; // カメラの追従スピード
-    public float rotateSpeed = 100f; // 視点回転スピード
-    public float zoomSpeed = 2f; // ズームスピード
-    public float minZoom = 3f; // 最小ズーム距離
-    public float maxZoom = 20f; // 最大ズーム距離
+    public Transform target; // スフィアなどの追従対象
+    public float distance = 10.0f;
+    public float zoomSpeed = 2.0f;
+    public float rotationSpeed = 5.0f;
+    public float minDistance = 3.0f;
+    public float maxDistance = 20.0f;
 
-    private float yaw = 0f;   // 左右回転（Y軸）
-    private float pitch = 0f; // 上下回転（X軸）
-    private float currentZoom; // 現在のズーム距離
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentZoom = offset.magnitude; // 初期ズーム距離を設定
-
-    }
+    private float currentX = 0.0f;
+    private float currentY = 10.0f;
+    public float yMinLimit = -20f;
+    public float yMaxLimit = 80f;
 
     void LateUpdate()
     {
         if (target == null) return;
 
-       // ボールの位置にオフセットを加えた位置へ、なめらかに移動
-       //Vector3 desiredPosition = target.position + offset;
-       // Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-       // transform.position = smoothedPosition;
+        // マウスの左右移動でカメラ回転
+        currentX += Input.GetAxis("Mouse X") * rotationSpeed;
+        currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
+        currentY = Mathf.Clamp(currentY, yMinLimit, yMaxLimit);
 
-       // ボールの方向を見る（任意）
-       // transform.LookAt(target);
-
-
-
-
-
-        if (Camera.main == null) return;
-
-        // カメラの方向に向ける
-        transform.forward = Camera.main.transform.forward;
-
-        if (target == null) return;
-
-        // 視点回転（方向キー）
-        if (Input.GetKey(KeyCode.LeftArrow)) yaw -= rotateSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.RightArrow)) yaw += rotateSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.UpArrow)) pitch -= rotateSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.DownArrow)) pitch += rotateSpeed * Time.deltaTime;
-
-        pitch = Mathf.Clamp(pitch, -45f, 45f); // 上下回転制限
-        // ズームイン・アウト（マウスホイール）
+        // マウスホイールでズーム
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        currentZoom -= scroll * zoomSpeed;
-        currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+        distance -= scroll * zoomSpeed;
+        distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
-        // オフセットをズーム距離に応じて更新
-        Vector3 zoomedOffset = offset.normalized * currentZoom;
+        // カメラ位置の計算
+        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+        Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+        Vector3 position = rotation * negDistance + target.position;
 
-        // カメラ位置を計算
-        Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
-        Vector3 desiredPosition = target.position + rotation * zoomedOffset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
-
-        // ターゲットを見る
-        transform.LookAt(target);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            transform.Translate(0, 0, 1);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            transform.Translate(1, 0, 0);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            transform.Translate(0, 0, -1);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            transform.Translate(-1, 0, 0);
-        }
-
-       
-            float rotateSpeed = 200f; // 回転スピード
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                // 左方向に回転（Y軸）
-                transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0);
-            }
-            else if (Input.GetKey(KeyCode.RightArrow))
-            {
-                // 右方向に回転（Y軸）
-                transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
-            }
-            else if (Input.GetKey(KeyCode.UpArrow))
-            {
-                // 上方向に回転（X軸）
-                transform.Rotate(-rotateSpeed * Time.deltaTime, 0, 0);
-            }
-            else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                // 下方向に回転（X軸）
-                transform.Rotate(rotateSpeed * Time.deltaTime, 0, 0);
-            }
-    }
-}
-
-public class CameraScript : MonoBehaviour
-{
-    void LateUpdate()
-    {
+        transform.rotation = rotation;
+        transform.position = position;
     }
 }

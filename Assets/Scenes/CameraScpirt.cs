@@ -20,16 +20,18 @@ public class CameraScpirt : MonoBehaviour
     void LateUpdate()
     {
         if (target == null) return;
+        if (Input.GetMouseButton(1))
+        {
+            // マウスの左右移動でカメラ回転
+            currentX += Input.GetAxis("Mouse X") * rotationSpeed;
+            currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
+            currentY = Mathf.Clamp(currentY, yMinLimit, yMaxLimit);
 
-        // マウスの左右移動でカメラ回転
-        currentX += Input.GetAxis("Mouse X") * rotationSpeed;
-        currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        currentY = Mathf.Clamp(currentY, yMinLimit, yMaxLimit);
-
-        // マウスホイールでズーム
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        distance -= scroll * zoomSpeed;
-        distance = Mathf.Clamp(distance, minDistance, maxDistance);
+            // マウスホイールでズーム
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            distance -= scroll * zoomSpeed;
+            distance = Mathf.Clamp(distance, minDistance, maxDistance);
+        }
 
         // カメラ位置の計算
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);

@@ -30,15 +30,15 @@ public class BGMManager : MonoBehaviour
                 ChangeBGM(titleBGM);
                 break;
             // ケース:プレイ
-            case "Play":
+            case "Jam":
                 ChangeBGM(playFirstBGM);
                 break;
             // ケース:プレイ（5～9ステージ目）
-            case "PlaySecond":
-                ChangeBGM(playSecondBGM);
-                break;
+            //case "PlaySecond":
+            //    ChangeBGM(playSecondBGM);
+            //    break;
             // ケース:リザルト
-            case "Result":
+            case "GameResult":
                 ChangeBGM(resultBGM);
                 break;
         }

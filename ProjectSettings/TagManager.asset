@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
+  - Goal_01
+  - Goal_02
+  - Goal_03
+  - Goal_04
+  - Goal_05
   layers:
   - Default
   - TransparentFX

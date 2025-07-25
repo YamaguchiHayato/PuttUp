@@ -7843,6 +7843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 887164cd86f9064448d65267066d377d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreObject: {fileID: 0}
+  lineRenderer: {fileID: 0}
 --- !u!135 &1190797849
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13578,7 +13580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edacd599e44fb774c94b8e072f415895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageText: {fileID: 0}
+  transparentAlpha: 0.3
 --- !u!1001 &1950396064
 PrefabInstance:
   m_ObjectHideFlags: 0

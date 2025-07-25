@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CameraScpirt : MonoBehaviour
 {
-    public Transform target; // スフィアなどの追従対象
+    private GameObject targetGameObject;
+    private Transform target; // スフィアなどの追従対象
     public float distance = 10.0f;
     public float zoomSpeed = 2.0f;
     public float rotationSpeed = 5.0f;
@@ -17,8 +18,19 @@ public class CameraScpirt : MonoBehaviour
     public float yMinLimit = -20f;
     public float yMaxLimit = 80f;
 
+    void Start()
+    {
+    }
+
     void LateUpdate()
     {
+        targetGameObject = GameObject.Find("Avatar(Clone)");
+        if (targetGameObject == null)
+        {
+            Debug.Log("TESTAAAA");
+            return;
+        }
+        target = targetGameObject.GetComponent<Transform>();
         if (target == null) return;
         if (Input.GetMouseButton(1))
         {

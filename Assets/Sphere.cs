@@ -16,10 +16,10 @@ public class Sphere : MonoBehaviour
     private Vector3 dragStartPos; // マウスを押した位置（ワールド座標）
     private Vector3 dragEndPos;   // マウスを離した位置（ワールド座標）
 
-    public const float forceMultiplier = 5.0f; // 力の倍率（ドラッグ距離に掛ける）
+    public const float forceMultiplier = 10.0f; // 力の倍率（ドラッグ距離に掛ける）
     public const float maxForce = 20.0f;       // 力の上限（ドラッグが長くてもこれ以上にならない）
 
-    private const float stopThreshold = 0.0f;
+    private const float stopThreshold = 1.0f;
     private bool isDragging = false; // ドラッグ中かどうかのフラグ
 
 

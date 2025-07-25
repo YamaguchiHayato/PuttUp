@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimerTMP : MonoBehaviour
 {
@@ -28,6 +29,13 @@ public class TimerTMP : MonoBehaviour
             remainingTime = Mathf.Max(remainingTime, 0f); // 負の値にならないように
 
             UpdateTimer();
+        }
+
+        // ホールが6かつ制限時間が0になったらリザルトへ遷移
+        if (remainingTime == 0f)
+        {
+            // リザルトシーンへ遷移
+            SceneManager.LoadScene("GameResult");
         }
     }
 

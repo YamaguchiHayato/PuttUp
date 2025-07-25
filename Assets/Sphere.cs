@@ -7,7 +7,7 @@ using UnityEngine;
 public class Sphere : MonoBehaviour
 {
     // スコアを表示するオブジェクト
-    [SerializeField] GameObject scoreObject;
+    GameObject scoreObject;
     ScoreTMP scoreTMPScript;
 
     private Rigidbody rb; // ボールに付いているRigidbody
@@ -19,7 +19,7 @@ public class Sphere : MonoBehaviour
     public const float forceMultiplier = 5.0f; // 力の倍率（ドラッグ距離に掛ける）
     public const float maxForce = 20.0f;       // 力の上限（ドラッグが長くてもこれ以上にならない）
 
-    private const float stopThreshold = 1.0f;
+    private const float stopThreshold = 0.0f;
     private bool isDragging = false; // ドラッグ中かどうかのフラグ
 
 
@@ -27,8 +27,11 @@ public class Sphere : MonoBehaviour
     {
         // Rigidbody コンポーネントの取得
         rb = GetComponent<Rigidbody>();
+
         // スコア表示用のスクリプトを取得
+        scoreObject = GameObject.Find("ScoreText");
         scoreTMPScript = scoreObject.GetComponent<ScoreTMP>();
+
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = 2;// 線の頂点数を2に設定

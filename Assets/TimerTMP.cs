@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class TimerTMP : MonoBehaviour
 {
@@ -46,5 +47,10 @@ public class TimerTMP : MonoBehaviour
         int seconds = Mathf.FloorToInt(remainingTime % 60f);
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    public void ResetTimer()
+    {
+        remainingTime = startTime;
+        UpdateTimer();
     }
 }

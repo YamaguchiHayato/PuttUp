@@ -147,18 +147,39 @@ public class Sphere : MonoBehaviour
         if (other.gameObject.tag == "Goal_01")
         {
             Destroy(other.gameObject);
+            // Sphereの座標を変更
+            transform.position = new Vector3(4.291f, 6.88f,-30.28f);
+
+            // Rigidbodyの速度もリセットしておく
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         else if (other.gameObject.tag == "Goal_02")
         {
             Destroy(other.gameObject);
+
+            transform.position = new Vector3(-16.7f, 4.1f, -38.8f);
+            
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         else if (other.gameObject.tag == "Goal_03")
         {
             Destroy(other.gameObject);
+
+            transform.position = new Vector3(-0.7f, 4.7f, -18.8f);
+            
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         else if (other.gameObject.tag == "Goal_04")
         {
             Destroy(other.gameObject);
+
+            transform.position = new Vector3(23.0f, 6.9f, -9.2f);
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         else if (other.gameObject.tag == "Goal_05")
         {

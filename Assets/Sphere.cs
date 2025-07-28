@@ -148,7 +148,7 @@ public class Sphere : MonoBehaviour
         {
             Destroy(other.gameObject);
             // Sphereの座標を変更
-            transform.position = new Vector3(4.291f, 6.88f,-30.28f);
+            transform.position = new Vector3(4.291f, 6.88f, -30.28f);
 
             // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;

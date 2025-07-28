@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Sphere : MonoBehaviour
 {
@@ -140,4 +141,30 @@ public class Sphere : MonoBehaviour
         return rb.velocity.magnitude > stopThreshold;
     }
 
+    //Sphereが特定のTagを持つオブジェクトと衝突したときの処理
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Goal_01")
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Goal_02")
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Goal_03")
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Goal_04")
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Goal_05")
+        {
+            Destroy(other.gameObject);
+            SceneManager.LoadScene("GameResult");
+        }
+       
+    }
 }

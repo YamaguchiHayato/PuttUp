@@ -24,6 +24,8 @@ public class Sphere : MonoBehaviour
     private bool isDragging = false; // ドラッグ中かどうかのフラグ
 
 
+    private Vector3 startMousePos; // マウスを押した位置
+
     void Start()
     {
         // Rigidbody コンポーネントの取得
@@ -42,26 +44,66 @@ public class Sphere : MonoBehaviour
 
     void Update()
     {
-        // ボールが動いている間は操作できないようにする
-        if (IsBallMoving()) return;
-
-        // マウス左ボタンを押したときにドラッグを開始
-        if (Input.GetMouseButtonDown(0))
+        if (rb.velocity.magnitude < 0.1f)
         {
-            StartDrag();
+
+            // ボールが動いている間は操作できないようにする
+            if (IsBallMoving()) return;
+
+            // マウス左ボタンを押したときにドラッグを開始
+            if (Input.GetMouseButtonDown(0))
+            {
+                startMousePos = Input.mousePosition; // ドラッグ開始点を記録
+                isDragging = true;
+                lineRenderer.enabled = true; // ラインを表示
+
+
+                //StartDrag();
+            }
+
+            // マウスを押し続けている間、ドラッグ中フラグが true のとき
+            if (Input.GetMouseButton(0) && isDragging)
+            {
+                //UpdateDrag();
+                Vector3 currentMousePos = Input.mousePosition; // 現在のマウス位置
+                Vector3 dragVector = startMousePos - currentMousePos; // ドラッグ方向
+
+                // ドラッグ方向をワールド座標に変換
+                Vector3 worldDirection = new Vector3(dragVector.x, 0, dragVector.y).normalized;
+                Vector3 ballPos = transform.position;
+
+                // ラインの始点：ボールの位置
+                lineRenderer.SetPosition(0, ballPos);
+
+                // ラインの終点：ドラッグ方向 × 距離で線の長さを表現
+                lineRenderer.SetPosition(1, ballPos + worldDirection * dragVector.magnitude * 0.05f);
+
+            }
+
+            // マウスボタンを離したときにショットを実行
+            if (Input.GetMouseButtonUp(0) && isDragging)
+            {
+                // ReleaseShot();
+                Vector3 endMousePos = Input.mousePosition;
+                Vector3 dragVector = startMousePos - endMousePos;
+
+                // ドラッグ方向に力を加える）
+                Vector3 forceDirection = new Vector3(dragVector.x, 0, dragVector.y);
+                rb.AddForce(forceDirection * forceMultiplier);
+
+                // ラインを非表示にして状態リセット
+                lineRenderer.enabled = false;
+                isDragging = false;
+
+            }
         }
 
-        // マウスを押し続けている間、ドラッグ中フラグが true のとき
-        if (Input.GetMouseButton(0) && isDragging)
+        else
         {
-            UpdateDrag();
+            // ボールが動いてる間はラインを非表示にする
+            lineRenderer.enabled = false;
         }
 
-        // マウスボタンを離したときにショットを実行
-        if (Input.GetMouseButtonUp(0) && isDragging)
-        {
-            ReleaseShot();
-        }
     }
 
     // ドラッグの開始時に呼ばれる処理
@@ -263,3 +305,4 @@ public class Sphere : MonoBehaviour
        
     }
 }
+

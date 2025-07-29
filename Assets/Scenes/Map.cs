@@ -19,6 +19,6 @@ public class Map : MonoBehaviour
     
     public void MapSelectButton()
     {
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene("Matchmaking");
     }
 }

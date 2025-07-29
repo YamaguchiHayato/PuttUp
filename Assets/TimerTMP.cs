@@ -24,16 +24,16 @@ public class TimerTMP : MonoBehaviour
     void Update()
     {
         // 残り時間が0より大きければ更新
-        if (remainingTime > 0f)
+        if (remainingTime > 0.0f)
         {
             remainingTime -= Time.deltaTime;
-            remainingTime = Mathf.Max(remainingTime, 0f); // 負の値にならないように
+            remainingTime = Mathf.Max(remainingTime, 0.0f); // 負の値にならないように
 
             UpdateTimer();
         }
 
         // ホールが6かつ制限時間が0になったらリザルトへ遷移
-        if (remainingTime == 0f)
+        if (remainingTime == 0.0f)
         {
             // リザルトシーンへ遷移
             SceneManager.LoadScene("GameResult");
@@ -43,8 +43,8 @@ public class TimerTMP : MonoBehaviour
     // 経過時間を更新し表示
     void UpdateTimer()
     {
-        int minutes = Mathf.FloorToInt(remainingTime / 60f);
-        int seconds = Mathf.FloorToInt(remainingTime % 60f);
+        int minutes = Mathf.FloorToInt(remainingTime / 60.0f);
+        int seconds = Mathf.FloorToInt(remainingTime % 60.0f);
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }

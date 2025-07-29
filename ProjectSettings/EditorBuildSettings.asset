@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameResult.unity
     guid: 8fe9f63b3e23d104e85a2645b613805e
+  - enabled: 1
+    path: Assets/Scenes/Matchmaking.unity
+    guid: 6cfb0d3db2fa097418a50b88726dcaa7
   m_configObjects: {}

@@ -5,8 +5,7 @@ public class BGMManager : MonoBehaviour
 {
     public AudioSource audioSource; // AudioSourceをアタッチ
     public AudioClip titleBGM;      // タイトル画面のBGM
-    public AudioClip playFirstBGM;  // 4ステージ目までのBGM
-    public AudioClip playSecondBGM; // 5～9ステージ目以降のBGM
+    public AudioClip playBGM;       // プレイ画面のBGM
     public AudioClip resultBGM;     // リザルト画面のBGM
 
     void Awake()
@@ -31,12 +30,8 @@ public class BGMManager : MonoBehaviour
                 break;
             // ケース:プレイ
             case "Jam":
-                ChangeBGM(playFirstBGM);
+                ChangeBGM(playBGM);
                 break;
-            // ケース:プレイ（5～9ステージ目）
-            //case "PlaySecond":
-            //    ChangeBGM(playSecondBGM);
-            //    break;
             // ケース:リザルト
             case "GameResult":
                 ChangeBGM(resultBGM);

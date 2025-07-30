@@ -110,6 +110,9 @@ public class Sphere : MonoBehaviour
             Vector3 forceDirection = new Vector3(dragVector.x, 0, dragVector.y);
             rb.AddForce(forceDirection * forceMultiplier);
 
+            // ボールを打つたびにスコア加算
+            scoreTMPScript.AddScore(1);
+
             // ラインを非表示にして状態リセット
             lineRenderer.enabled = false;
             isDragging = false;
@@ -124,14 +127,13 @@ public class Sphere : MonoBehaviour
         if (other.gameObject.tag == "Goal_01")
         {
             Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(1); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
             // Sphereの座標を変更
             transform.position = new Vector3(4.291f, 6.88f, -30.28f);
-
-            //スコアを保存
-            scoreTMPScript.SaveScoreForGoal(1);
-
-            // スコアをリセット
-            scoreTMPScript.ResetScore();
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -152,13 +154,11 @@ public class Sphere : MonoBehaviour
         {
             Destroy(other.gameObject);
 
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(2); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
             transform.position = new Vector3(-16.7f, 4.1f, -38.8f);
-
-            //スコアを保存
-            scoreTMPScript.SaveScoreForGoal(2);
-
-            // スコアをリセット
-            scoreTMPScript.ResetScore();
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -178,13 +178,11 @@ public class Sphere : MonoBehaviour
         {
             Destroy(other.gameObject);
 
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(3); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
             transform.position = new Vector3(-0.7f, 4.7f, -18.8f);
-
-            //スコアを保存
-            scoreTMPScript.SaveScoreForGoal(3);
-
-            // スコアをリセット
-            scoreTMPScript.ResetScore();
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -204,13 +202,11 @@ public class Sphere : MonoBehaviour
         {
             Destroy(other.gameObject);
 
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(4); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
             transform.position = new Vector3(23.0f, 6.9f, -9.2f);
-
-            //スコアを保存
-            scoreTMPScript.SaveScoreForGoal(4);
-
-            // スコアをリセット
-            scoreTMPScript.ResetScore();
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -226,17 +222,190 @@ public class Sphere : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+
         else if (other.gameObject.tag == "Goal_05")
         {
-            //スコアを保存
-            scoreTMPScript.SaveScoreForGoal(5);
+            Destroy(other.gameObject);
 
-            // スコアをリセット
-            scoreTMPScript.ResetScore();
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(5); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
+            transform.position = new Vector3(99.7f, 2.4f, -91.3f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_06")
+        {
+            Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(6); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
+            transform.position = new Vector3(109.8f, 2.3f, -81.5f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_07")
+        {
+            Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(7); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
+            transform.position = new Vector3(105.48f, 3.6f, -83.7f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_08")
+        {
+            Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(8); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
+            transform.position = new Vector3(99.4f, 1.99f, -95.0f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_09")
+        {
+            Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(9); // スコア保存
+            scoreTMPScript.ResetScore();        // スコアリセット
+
+            transform.position = new Vector3(80.0f, 2.15f, -89.87f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_10")
+        {
+            Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(10); // スコア保存
+            scoreTMPScript.ResetScore();         // スコアリセット
+
+            transform.position = new Vector3(51.6f, 16.76f, -96.1f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_11")
+        {
+            Destroy(other.gameObject);
+
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(11); // スコア保存
+            scoreTMPScript.ResetScore();         // スコアリセット
+
+            transform.position = new Vector3(61.0f, 23.93f, -65.54f);
+
+            //タイマーをリセット
+            GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
+            if (timerObject != null)
+            {
+                TimerTMP timerTMPScript = timerObject.GetComponent<TimerTMP>();
+                if (timerTMPScript != null)
+                {
+                    timerTMPScript.ResetTimer();
+                }
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        else if (other.gameObject.tag == "Goal_12")
+        {
+            // ゴール到達時
+            scoreTMPScript.SaveScoreForGoal(12); // スコア保存
+            scoreTMPScript.ResetScore();         // スコアリセット
 
             Destroy(other.gameObject);
             SceneManager.LoadScene("GameResult");
         }
-
     }
 }

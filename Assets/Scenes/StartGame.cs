@@ -19,6 +19,11 @@ public class StartGame : MonoBehaviour
 
     public void StartButton()
     {
+        for (int i = 1; i <= 12; i++)
+        {
+            PlayerPrefs.DeleteKey($"Score_Goal_{i}");
+        }
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Jam");
     }
 }

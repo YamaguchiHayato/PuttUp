@@ -25,6 +25,24 @@ public class Sphere : MonoBehaviour
 
     private Vector3 startMousePos; // マウスを押した位置
 
+    // 各ゴールの座標を配列で管理
+    private Vector3[] goalPositions = new Vector3[]
+    {
+        new Vector3(4.291f, 6.88f, -30.28f),    // Goal_01
+        new Vector3(-16.7f, 4.1f, -38.8f),      // Goal_02
+        new Vector3(-0.7f, 4.7f, -18.8f),       // Goal_03
+        new Vector3(23.0f, 6.9f, -9.2f),        // Goal_04
+        new Vector3(99.7f, 2.4f, -91.3f),       // Goal_05
+        new Vector3(109.8f, 2.3f, -81.5f),      // Goal_06
+        new Vector3(105.48f, 3.6f, -83.7f),     // Goal_07
+        new Vector3(99.4f, 1.99f, -95.0f),      // Goal_08
+        new Vector3(80.0f, 2.15f, -89.87f),     // Goal_09
+        new Vector3(51.6f, 16.76f, -96.1f),     // Goal_10
+        new Vector3(61.0f, 23.93f, -65.54f),    // Goal_11
+        // Goal_12はリザルト遷移なので座標は不要
+    };
+
+    private int lastGoalIndex = -1; // 最後に衝突したゴール番号（0～11）
 
     void Start()
     {
@@ -49,13 +67,19 @@ public class Sphere : MonoBehaviour
         {
             MouseOperation(); // マウス操作を実行
         }
-
         else
         {
             // ボールが動いてる間はラインを非表示にする
             lineRenderer.enabled = false;
         }
 
+        // スペースキーで座標を戻す
+        if (Input.GetKeyDown(KeyCode.Space) && lastGoalIndex >= 0 && lastGoalIndex < goalPositions.Length)
+        {
+            transform.position = goalPositions[lastGoalIndex];
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
     // ボールが動いているかどうかを判定（一定の速さ以下なら静止とみなす）
@@ -126,14 +150,15 @@ public class Sphere : MonoBehaviour
     {
         if (other.gameObject.tag == "Goal_01")
         {
+            lastGoalIndex = 0;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(1); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
             // Sphereの座標を変更
-            transform.position = new Vector3(4.291f, 6.88f, -30.28f);
+            transform.position = goalPositions[0];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -152,13 +177,15 @@ public class Sphere : MonoBehaviour
         }
         else if (other.gameObject.tag == "Goal_02")
         {
+            lastGoalIndex = 1;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(2); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(-16.7f, 4.1f, -38.8f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[1];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -171,18 +198,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
         else if (other.gameObject.tag == "Goal_03")
         {
+            lastGoalIndex = 2;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(3); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(-0.7f, 4.7f, -18.8f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[2];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -195,18 +225,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
         else if (other.gameObject.tag == "Goal_04")
         {
+            lastGoalIndex = 3;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(4); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(23.0f, 6.9f, -9.2f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[3];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -219,19 +252,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_05")
         {
+            lastGoalIndex = 4;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(5); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(99.7f, 2.4f, -91.3f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[4];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -244,19 +279,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_06")
         {
+            lastGoalIndex = 5;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(6); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(109.8f, 2.3f, -81.5f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[5];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -269,19 +306,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_07")
         {
+            lastGoalIndex = 6;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(7); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(105.48f, 3.6f, -83.7f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[6];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -294,19 +333,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_08")
         {
+            lastGoalIndex = 7;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(8); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(99.4f, 1.99f, -95.0f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[7];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -319,19 +360,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_09")
         {
+            lastGoalIndex = 8;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(9); // スコア保存
-            scoreTMPScript.ResetScore();        // スコアリセット
+            scoreTMPScript.ResetScore();       // スコアリセット
 
-            transform.position = new Vector3(80.0f, 2.15f, -89.87f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[8];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -344,19 +387,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_10")
         {
+            lastGoalIndex = 9;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(10); // スコア保存
-            scoreTMPScript.ResetScore();         // スコアリセット
+            scoreTMPScript.ResetScore();        // スコアリセット
 
-            transform.position = new Vector3(51.6f, 16.76f, -96.1f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[9];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -369,19 +414,21 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_11")
         {
+            lastGoalIndex = 10;
             Destroy(other.gameObject);
 
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(11); // スコア保存
-            scoreTMPScript.ResetScore();         // スコアリセット
+            scoreTMPScript.ResetScore();        // スコアリセット
 
-            transform.position = new Vector3(61.0f, 23.93f, -65.54f);
+            // Sphereの座標を変更
+            transform.position = goalPositions[10];
 
             //タイマーをリセット
             GameObject timerObject = GameObject.Find("TimerText"); // TimerTMPがアタッチされているオブジェクト名
@@ -394,17 +441,19 @@ public class Sphere : MonoBehaviour
                 }
             }
 
+            // Rigidbodyの速度もリセットしておく
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
         else if (other.gameObject.tag == "Goal_12")
         {
+            lastGoalIndex = 11;
+            Destroy(other.gameObject);
+
             // ゴール到達時
             scoreTMPScript.SaveScoreForGoal(12); // スコア保存
-            scoreTMPScript.ResetScore();         // スコアリセット
+            scoreTMPScript.ResetScore();        // スコアリセット
 
-            Destroy(other.gameObject);
             SceneManager.LoadScene("GameResult");
         }
     }

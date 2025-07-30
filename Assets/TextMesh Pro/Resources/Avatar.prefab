@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 887164cd86f9064448d65267066d377d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
   lineRenderer: {fileID: 3930655684693159693}
 --- !u!120 &3930655684693159693
 LineRenderer:

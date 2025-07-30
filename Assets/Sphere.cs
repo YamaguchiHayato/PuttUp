@@ -30,7 +30,6 @@ public class Sphere : MonoBehaviour
     {
         // Rigidbody コンポーネントの取得
         rb = GetComponent<Rigidbody>();
-
         // スコア表示用のスクリプトを取得
         scoreObject = GameObject.Find("ScoreText");
         scoreTMPScript = scoreObject.GetComponent<ScoreTMP>();
@@ -79,7 +78,6 @@ public class Sphere : MonoBehaviour
             lineRenderer.enabled = true; // ラインを表示
 
         }
-
         // マウスを押し続けている間、ドラッグ中フラグが true のとき
         if (Input.GetMouseButton(0) && isDragging)
         {

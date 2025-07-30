@@ -10,6 +10,13 @@ TagManager:
   - Goal_03
   - Goal_04
   - Goal_05
+  - Goal_06
+  - Goal_07
+  - Goal_08
+  - Goal_09
+  - Goal_10
+  - Goal_11
+  - Goal_12
   layers:
   - Default
   - TransparentFX
